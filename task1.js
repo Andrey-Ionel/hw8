@@ -4,16 +4,15 @@
 
 function onAddButtonClick() {
 
-    const eventButton = document.querySelector('.js-event-button');
-    const ulForAddList = document.querySelector('.js-list-add');
-    const openingParagraph = document.querySelector('.js-hidden-text');
-    const inputForAdd = document.querySelector('.js-input-add');
+    const addListButton = document.querySelector('.js-add-todo');
+    const inputForAddList = document.querySelector('.js-todo-name');
+    const locationForAddList = document.querySelector('.js-todo-list');
+    const emptyListMessage = document.querySelector('.js-hidden-text');
 
-    eventButton.addEventListener('mousedown', createNewList);
-    eventButton.addEventListener('mouseup', clearsInputValue);
-    inputForAdd.addEventListener('keypress', desableEnterKey);
+    addListButton.addEventListener('click', createNewList);
+    inputForAddList.addEventListener('keypress', disableEnterKey);
 
-    function desableEnterKey(event) {
+    function disableEnterKey(event) {
 
         if (event.keyCode === 13) {
             event.preventDefault();
@@ -22,7 +21,7 @@ function onAddButtonClick() {
     }
 
     function getInputValue() {
-        const currentInputValue = inputForAdd.value;
+        const currentInputValue = inputForAddList.value;
         return currentInputValue;
     }
 
@@ -31,22 +30,17 @@ function onAddButtonClick() {
         if (getInputValue() === '' || getInputValue() === ' ') {
             alert('Your input is empty');
         } else {
-            openingParagraph.hidden = true;
-            return ulForAddList.insertAdjacentHTML('beforeend', `<li class="list-group-item">${getInputValue()}</li>`);
+            emptyListMessage.hidden = true;
+            locationForAddList.insertAdjacentHTML('beforeend', `<li class="list-group-item">${getInputValue()}</li>`);
+            return clearsInputValue();
         }
 
     }
 
     function clearsInputValue() {
-        inputForAdd.value = '';
+        inputForAddList.value = '';
     }
 
 }
 
 onAddButtonClick();
-
-
-
-
-
-
